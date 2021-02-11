@@ -1,0 +1,318 @@
+@font-face {
+	font-family: omyim;
+	src: url(../assets/font/PSL-Omyim.ttf);
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background-image: url("../assets/image/background.png");
+	background-size: auto;
+	background-repeat: no-repeat;
+	z-index: -1;
+}
+
+.swal2-popup {
+	font-family: omyim !important;
+	font-size: 1.2rem !important;
+}
+
+.swal2-shown {
+    display:flex;
+    height:100vh;
+}
+
+.ribbon {
+	width: 26vw;
+	margin-top: 5vh;
+	margin-bottom: -4vh;
+}
+
+.spin-button {
+	position: absolute;
+	top: 47.7vh;
+	left: 47.7vw;
+	width: 5vw;
+}
+
+.spin-button:hover {
+	cursor: pointer;
+}
+
+.spin-button:active{
+	width: 4.5vw;
+}
+
+.wheel-back {
+	position: absolute;
+	align-items: center;
+	z-index: 1000;
+	margin-bottom: 1vh;
+}
+
+.img-segment {
+	margin-top: 3.5vh !important;
+	z-index: 3000;
+	width: 24%;
+}
+
+.img-bottom-left {
+	width: 15vw;
+}
+
+.img-bottom-right {
+	width: 10vw;
+}
+
+#canvasContainer {
+	background-image: url("../assets/image/wheel_back.png");
+	background-repeat: no-repeat; /* Ensure that background does not repeat */
+	background-position: center; /* Ensure image is centred */
+	background-size: 26vw auto;
+}
+
+@media only screen and (max-width: 600px) {
+	body {
+		background-image: url("../assets/image/background-mobile.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+		z-index: -1;
+	}
+
+	.ribbon {
+		width: 94vw;
+		margin-top: 5vh;
+	}
+
+	.spin-button {
+		position: absolute;
+		top: 50vh;
+		left: 42vw;
+		width: 18vw;
+	}
+
+	.spin-button:hover {
+		cursor: pointer;
+	}
+
+	.spin-button:active{
+		width: 16vw;
+	}
+
+	.img-segment {
+		/* position: fixed; */
+		z-index: 3000;
+		margin-top: 4vh !important;
+		width: 90%;
+	}
+
+	#canvasContainer {
+		background-image: url(../assets/image/wheel_back.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 100% auto;
+	}
+
+	.img-bottom-left {
+		width: 48vw;
+	}
+	
+	.img-bottom-right {
+		width: 40vw;
+	}
+}
+ 
+
+/* ?iphone 5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+    .spin-button {
+        position: absolute;
+        top: 48.5vh;
+        left: 42vw;
+        width: 18vw;
+    }
+
+    .spin-button:active{
+        width: 17vw;
+    }
+
+    .swal2-popup {
+        font-family: omyim !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* ?iphone 6, 6s, 7, 8 */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+    .spin-button {
+        position: absolute;
+        top: 48vh;
+        left: 42vw;
+        width: 18vw;
+    }
+
+    .spin-button:active{
+        width: 17vw;
+    }
+
+    .swal2-popup {
+        font-family: omyim !important;
+        font-size: 1rem !important;
+    }
+}
+    
+/* ?iphone X , XS, 11 Pro, 12 Mini */
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    .ribbon {
+        width: 94vw;
+        margin-top: 8vh;
+    }
+
+    .spin-button {
+        position: absolute;
+        top: 48vh;
+        left: 42vw;
+        width: 18vw;
+    }
+    
+    .img-segment {
+        /* position: fixed; */
+        z-index: 3000;
+        margin-top: 3.4vh !important;
+        width: 90%;
+    }
+
+    #canvasContainer{
+        margin-top: 5vh;
+    }
+}
+
+/* ?iphone 6+, 6s+, 7+, 8+ */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+    .ribbon {
+        width: 94vw;
+        margin-top: 4vh;
+        margin-bottom: -8vh;
+    }
+
+    .img-segment {
+        /* position: fixed; */
+        z-index: 3000;
+        margin-top: 4vh !important;
+        width: 90%;
+    }
+
+    .mb-5-iphone6{
+        margin-top: -5vh;
+    }
+}
+
+/* iphone 12, 12 Pro */
+@media only screen and (min-device-width: 390px) and (max-device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+    .ribbon {
+        width: 94vw;
+        margin-top: 8vh;
+        margin-bottom: 2vh;
+    }
+
+    .spin-button {
+        position: absolute;
+        top: 48vh;
+        left: 42vw;
+        width: 18vw;
+    }
+    
+    .img-segment {
+        /* position: fixed; */
+        z-index: 3000;
+        margin-top: 3vh !important;
+        width: 90%;
+    }
+
+    #canvasContainer{
+        margin-bottom: 2vh;
+    }
+}
+
+/* iphone XR, 11 */
+/* @media only screen and (min-device-width : 414px) and (max-device-height : 896px) and (-webkit-device-pixel-ratio : 2) { } */
+    
+/* iphone 12 Pro Max */
+/* @media only screen and (min-device-width : 428px) and (max-device-height : 926px) and (-webkit-device-pixel-ratio : 3) { } */
+
+/* Apple iPad Air Min-Width Media Queries */
+/* @media only screen and (min-width: 768px) { Your Styles... } */
+
+/* Apple iPad Air Min-Height Media Queries */
+/* @media only screen and (min-height: 1024px) { Your Styles...  */
+
+/* Apple iPad Air Landscape Media Queries */
+/* @media only screen and (min-width: 1024px) and (orientation: landscape) { Your Styles... } */
+
+/* ?Apple iPad Air Portrait Media Queries */
+@media only screen and (min-width: 768px) and (orientation: portrait) { 
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background-image: url("../assets/image/background.png");
+        background-size: auto;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+    
+    .swal2-popup {
+        font-family: omyim !important;
+        font-size: 1.2rem !important;
+    }
+    
+    .ribbon {
+        width: 85vw;
+        margin-top: 5vh;
+        margin-bottom: -4vh;
+    }
+    
+    .spin-button {
+        position: absolute;
+        top: 52vh;
+        left: 44vw;
+        width: 12vw;
+    }
+    
+    .spin-button:hover {
+        cursor: pointer;
+    }
+    
+    .spin-button:active{
+        width: 11.5vw;
+    }
+    
+    .wheel-back {
+        position: absolute;
+        align-items: center;
+        z-index: 1000;
+        margin-bottom: 1vh;
+    }
+    
+    .img-segment {
+        margin-top: 3vh !important;
+        z-index: 3000;
+        width: 65%;
+    }
+    
+    .img-bottom-left {
+        width: 28vw;;
+    }
+    
+    .img-bottom-right {
+        width: 25vw;
+    }
+
+    #canvasContainer {
+		background-image: url(../assets/image/wheel_back.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 70vw auto;
+	}
+}

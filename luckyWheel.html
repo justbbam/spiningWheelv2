@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Smooto Lucky Wheel</title>
+		<link rel="stylesheet" href="./css/bootstrap.min.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="icon" href="./assets/image/favicon.ico" />
+		<script type="text/javascript" src="./js/winwheel.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+	</head>
+
+	<body>        
+		<div class="container-fluid text-center">
+			<img src="./assets/image/ribbon.png" class="ribbon" />
+			<div class="mx-auto canvasContainer">
+				<!-- <img src="./assets/image/spinButton.png" class="spin-button" onclick="startSpin()"/> -->
+				<canvas
+					class="img-segment"
+					id="canvas"
+					width="500px"
+					height="500px"
+					data-responsiveMinWidth="180"
+					data-responsiveScaleHeight="true"
+                    onclick="startSpin()">
+				</canvas>
+            </div>
+			<div class="text-center">
+				<img src="./assets/image/tomato-01.png" class="img-bottom-left" />
+				<img src="./assets/image/tomato-02.png" class="img-bottom-right" />
+			</div>
+        </div>
+	</body>
+
+	<script>
+		// Create new wheel object specifying the parameters at creation time.
+		// let theWheel = new Winwheel({
+		// 	numSegments: 8,
+        //     drawMode: 'image',      // drawMode must be set to image.
+		// 	drawMode: 'segmentImage', // Must be segmentImage to draw wheel using one image per segemnt.
+		// 	responsive: true,
+		// 	rotationAngle: -22,
+		// 	// Define segments including image and text.
+		// 	segments: [
+		// 		{ image: "./assets/image/ELEMENT-01.png", text: "คูปองส่วนลด 100 บาท" },
+		// 		{ image: "./assets/image/ELEMENT-05.png", text: "สมูทโตะ ซันฟาวเวอร์ ซันสกรีน ครีม" },
+		// 		{ image: "./assets/image/ELEMENT-02.png", text: "คูปองส่วนลด 15 บาท" },
+		// 		{ image: "./assets/image/ELEMENT-06.png", text: "สมูทโตะ โทเมโท คอลลาเจน ไวท์ แอนด์ สมูท มาส์ค" },
+		// 		{ image: "./assets/image/ELEMENT-03.png", text: "คูปองส่วนลด 30 บาท" },
+		// 		{ image: "./assets/image/ELEMENT-07.png", text: "สมูทโตะ พายแอปเปิ้ล คอลลาเจน ไวท์ เซรั่ม" },
+		// 		{ image: "./assets/image/ELEMENT-04.png", text: "คูปองส่วนลด 50 บาท" },
+		// 		{ image: "./assets/image/ELEMENT-08.png", text: "สมูทโตะ อโล แอนด์ คิวคัมเบอร์ เมคอัพ รีมูฟเวอร์" },
+		// 	],
+		// 	// Specify the animation to use.
+		// 	animation: {
+		// 		type: "spinToStop",
+		// 		duration: 5, // Duration in seconds.
+		// 		spins: 8, // Number of complete spins.
+		// 		'callbackFinished' : alertPrize
+		// 	},
+		// });
+        let theWheel = new Winwheel({
+            numSegments: 8,         // Specify number of segments.
+            outerRadius: 150,       // Set outer radius so wheel fits inside the background.
+            drawMode: 'image',   // drawMode must be set to image.
+            responsive: true,
+            'segments'     :                // Define segments.
+            [
+		    {text: "คูปองส่วนลด 100 บาท" },
+		    {text: "สมูทโตะ ซันฟาวเวอร์ ซันสกรีน ครีม" },
+		    {text: "คูปองส่วนลด 15 บาท" },
+		    {text: "สมูทโตะ โทเมโท คอลลาเจน ไวท์ แอนด์ สมูท มาส์ค" },
+		    {text: "คูปองส่วนลด 30 บาท" },
+		    {text: "สมูทโตะ พายแอปเปิ้ล คอลลาเจน ไวท์ เซรั่ม" },
+		    {text: "คูปองส่วนลด 50 บาท" },
+		    {text: "สมูทโตะ อโล แอนด์ คิวคัมเบอร์ เมคอัพ รีมูฟเวอร์" },
+            ],
+            'animation' :                   // Specify the animation to use.
+            {
+                'type'     : 'spinToStop',
+                'duration' : 5,     // Duration in seconds.
+                'spins'    : 8,     // Number of complete spins.
+                'callbackFinished' : alertPrize
+            }
+        });
+
+            // Create new image object in memory.
+            let loadedImg = new Image();
+
+            // Create callback to execute once the image has finished loading.
+            loadedImg.onload = function()
+            {
+                theWheel.wheelImage = loadedImg;    // Make wheelImage equal the loaded image object.
+                theWheel.draw();                    // Also call draw function to render the wheel.
+            }
+
+            // Set the image source, once complete this will trigger the onLoad callback (above).
+            loadedImg.src = "./assets/image/LUCKYWHEEL.png";
+
+        
+        function calculatePrize()
+        {
+            // This formula always makes the wheel stop somewhere inside prize 3 at least
+            // 1 degree away from the start and end edges of the segment.
+            let stopAt = (20 + Math.floor((Math.random() * 43)))
+    
+            // Important thing is to set the stopAngle of the animation before stating the spin.
+            theWheel.animation.stopAngle = stopAt;
+    
+            // May as well start the spin from here.
+            theWheel.startAnimation();
+        }
+
+		function startSpin() {
+			// Stop any current animation.
+			theWheel.stopAnimation(false);
+			// Reset the rotation angle to less than or equal to 360 so spinning again works as expected.
+			// Setting to modulus (%) 360 keeps the current position.
+			theWheel.rotationAngle = theWheel.rotationAngle % 360;
+			// Start animation.
+			theWheel.startAnimation();
+		}
+
+        function resetWheel()
+            {
+                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+                theWheel.draw();                // Call draw to render changes to the wheel.
+
+                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+            }
+
+		function alertPrize(indicatedSegment) {
+			Swal.fire({
+				// title: 'Custom width, padding, background.',
+				text:'ขอแสดงความยินดี คุณได้รับ '+ indicatedSegment.text,
+				width: 600,
+				padding: '1em',
+				showConfirmButton: true,
+                allowOutsideClick: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'หมุนอีกครั้ง'
+			})
+            // .then((result) => {
+            //     Swal.fire({
+            //     text:'ขอแสดงความยินดี คุณได้รับ '+ indicatedSegment.text,
+			// 	width: 600,
+			// 	padding: '1em',
+            //     showConfirmButton: false,
+            //     allowOutsideClick: false,
+            //     })
+            // })
+            console.log(localStorage.getItem("userData"));
+            console.log('reward -> ' + indicatedSegment.text);
+            resetWheel()
+		}
+    </script>
+</html>

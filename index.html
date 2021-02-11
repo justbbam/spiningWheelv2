@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooto Lucky Wheel</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="icon" href="./assets/image/favicon.ico" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+</head>
+<body>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '250601930116430',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v9.0'
+          });
+            
+          FB.AppEvents.logPageView();   
+            
+        };
+    
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
+        var fbLoginStatus = false;
+        function checkFbLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
+        }
+
+    function statusChangeCallback(response) {
+    if(fbLoginStatus == false) {  
+        if (response.status == 'connected') {
+          fbLoginStatus = true;
+          getCurrentUserInfo(response);
+        } else {
+          FB.login(function(response) {
+            if (response.authResponse){
+              fbLoginStatus = true;
+              getCurrentUserInfo(response);
+            } else {
+              console.log('Auth failed.');
+            }
+          }, {scope: 'public_profile,email'});
+        }
+      } else if(fbLoginStatus == true) {
+        console.log(response)
+        getCurrentUserInfo(response);
+      }   
+    }
+
+    function getCurrentUserInfo() {   
+      FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
+        var result = '';
+        result+= "ID: "+userInfo.id+"\r";
+        result+= " First Name: "+userInfo.first_name+"\r";
+        result+= " Last Name: "+userInfo.last_name+"\r";
+        result+= " E-mail: "+userInfo.email+"\r";
+        console.log(result)
+        localStorage.setItem("userData", result);
+        window.location = "https://smootoluckywheel.netlify.app/luckywheel";
+      });   
+    }
+
+    </script>
+    <button onclick="checkFbLoginState();" 
+    class="btn btn-primary" 
+    style="margin:0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+    <span class="fa fa-facebook"></span>&nbsp; &nbsp; Login with Facebook</a>
+    </div>
+</div>
+</body>
+</html>
