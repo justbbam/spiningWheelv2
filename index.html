@@ -69,12 +69,13 @@
                 // result+= userInfo.last_name+"\r";
                 // result+= " E-mail: "+userInfo.email+"\r";
 
-                var userID = localStorage.getItem('userID', userInfo.id);
-                var userName = localStorage.getItem('userName', fullname);
-                var userEmail = localStorage.getItem('userEmail', userInfo.id);
-
-                // console.log(result)
-                localStorage.setItem("userName", userName);
+                // var userID = localStorage.getItem('userID', userInfo.id);
+                // var userName = localStorage.getItem('userName', fullname);
+                // var userEmail = localStorage.getItem('userEmail', userInfo.email);
+                localStorage.setItem("userID", userInfo.id);
+                localStorage.setItem("userName", fullname);
+                localStorage.setItem("userEmail", userInfo.id);
+                
                 window.location.href = "https://smootoluckywheelv2.netlify.app/luckywheel";
             });
         }
