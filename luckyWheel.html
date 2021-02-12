@@ -165,9 +165,9 @@
             // document.getElementById('userEmail').value = userEmail;
 
             var urlencoded = new URLSearchParams();
-            urlencoded.append("fbid", localStorage.getItem(userID));
-            urlencoded.append("name", localStorage.getItem(userName));
-            urlencoded.append("email", localStorage.getItem(userEmail));
+            urlencoded.append("fbid", localStorage.getItem("userID"));
+            urlencoded.append("name", localStorage.getItem("userName"));
+            urlencoded.append("email", localStorage.getItem("userEmail"));
             urlencoded.append("reward", indicatedSegment.text);
             console.log("userID from getItem", localStorage.getItem("userID"))
             var requestOptions = {
