@@ -12,14 +12,14 @@
 <body>
     <script>
         window.fbAsyncInit = function() {
-          FB.init({
+        FB.init({
             appId      : '1934797649991769',
             cookie     : true,
             xfbml      : true,
             version    : 'v9.0'
-          });
+        });
             
-          FB.AppEvents.logPageView();   
+        FB.AppEvents.logPageView();   
             
         };
     
@@ -38,26 +38,26 @@
           });
         }
 
-    function statusChangeCallback(response) {
-    if(fbLoginStatus == false) {  
-        if (response.status == 'connected') {
-          fbLoginStatus = true;
-          getCurrentUserInfo(response);
-        } else {
-          FB.login(function(response) {
-            if (response.authResponse){
+        function statusChangeCallback(response) {
+        if(fbLoginStatus == false) {  
+            if (response.status == 'connected') {
               fbLoginStatus = true;
               getCurrentUserInfo(response);
             } else {
-              console.log('Auth failed.');
+              FB.login(function(response) {
+                if (response.authResponse){
+                  fbLoginStatus = true;
+                  getCurrentUserInfo(response);
+                } else {
+                  console.log('Auth failed.');
+                }
+              }, {scope: 'public_profile,email'});
             }
-          }, {scope: 'public_profile,email'});
+          } else if(fbLoginStatus == true) {
+            console.log(response)
+            getCurrentUserInfo(response);
+          }   
         }
-      } else if(fbLoginStatus == true) {
-        console.log(response)
-        getCurrentUserInfo(response);
-      }   
-    }
 
     function getCurrentUserInfo() {   
       FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
@@ -68,7 +68,7 @@
         result+= " E-mail: "+userInfo.email+"\r";
         console.log(result)
         localStorage.setItem("userData", result);
-        window.location = "https://smootoluckywheel.netlify.app/luckywheel";
+        window.location.href = "https://smootoluckywheelv2.netlify.app/luckywheel";
       });   
     }
 
