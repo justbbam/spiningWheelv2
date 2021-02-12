@@ -59,18 +59,66 @@
           }   
         }
 
-    function getCurrentUserInfo() {   
-      FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
-        var result = '';
-        result+= "ID: "+userInfo.id+"\r";
-        result+= " First Name: "+userInfo.first_name+"\r";
-        result+= " Last Name: "+userInfo.last_name+"\r";
-        result+= " E-mail: "+userInfo.email+"\r";
-        console.log(result)
-        localStorage.setItem("userData", result);
-        window.location.href = "https://smootoluckywheelv2.netlify.app/luckywheel";
-      });   
-    }
+        function getCurrentUserInfo() {   
+            FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
+                var result = '';
+                result+= "ID: "+userInfo.id+"\r";
+                result+= " First Name: "+userInfo.first_name+"\r";
+                result+= " Last Name: "+userInfo.last_name+"\r";
+                result+= " E-mail: "+userInfo.email+"\r";
+                console.log(result)
+                localStorage.setItem("userData", result);
+
+
+                var settings = {
+                    "url": "https://smootoluckywheel.herokuapp.com/luckyWheel/create",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                      "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                      "fbid": "1232234567654321",
+                      "name": "ทดสอบ ระบบ",
+                      "email": "helloworld@test.com",
+                      "reward": "คูปอง 15 บาท"
+                    }
+                };
+
+                $.ajax(settings).done(function (response) {
+                  console.log(response);
+                });
+
+                window.location.href = "https://smootoluckywheelv2.netlify.app/luckywheel";
+            });
+        }
+
+        // function instertReSult(data) {
+        //     const url = "https://localhost:8080/login";
+        //     const data = {
+        //         'fbid' : document.getElementById('email').value,
+        //         'password' : document.getElementById('new_password').value
+        //         };
+        //     const other_params = {
+        //         headers : { "content-type" : "application/json; charset=UTF-8" },
+        //         body : data,
+        //         method : "POST",
+        //         mode : "cors"
+        //     };
+        //     fetch(url, other_params)
+        //         .then(function(response) {
+        //             if (response.ok) {
+        //                 alert(response.json());
+        //             } else {
+        //                 throw new Error("Could not reach the API: " + response.statusText);
+        //             }
+        //         }).then(function(data) {
+        //             document.getElementById("message").innerHTML = data.encoded;
+        //         }).catch(function(error) {
+        //             document.getElementById("message").innerHTML = error.message;
+        //         });
+        //     return false;
+        // }
 
     </script>
     <button onclick="checkFbLoginState();" 
