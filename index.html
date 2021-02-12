@@ -62,13 +62,19 @@
 
         function getCurrentUserInfo() {   
             FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
-                var result = '';
-                result+= "ID: "+userInfo.id+"\r";
-                result+= " First Name: "+userInfo.first_name+"\r";
-                result+= " Last Name: "+userInfo.last_name+"\r";
-                result+= " E-mail: "+userInfo.email+"\r";
-                console.log(result)
-                localStorage.setItem("userData", result);
+                var fullname = userInfo.id+" "+userInfo.last_name
+                // var result = '';
+                // result+= "ID: "+userInfo.id+"\r";
+                // result+= " Name: "+userInfo.first_name+"\r";
+                // result+= userInfo.last_name+"\r";
+                // result+= " E-mail: "+userInfo.email+"\r";
+
+                var userID = localStorage.getItem('userID', userInfo.id);
+                var userName = localStorage.getItem('userName', fullname);
+                var userEmail = localStorage.getItem('userEmail', userInfo.id);
+
+                // console.log(result)
+                localStorage.setItem("userName", userName);
                 window.location.href = "https://smootoluckywheelv2.netlify.app/luckywheel";
             });
         }

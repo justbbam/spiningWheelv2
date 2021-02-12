@@ -161,10 +161,10 @@
             myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
             var urlencoded = new URLSearchParams();
-            urlencoded.append("fbid", "1234567654321");
-            urlencoded.append("name", "wissanee jaichagard");
-            urlencoded.append("email", "wissanee@test.com");
-            urlencoded.append("reward", "คูปอง 15 บาท");
+            urlencoded.append("fbid", localStorage.getItem('userID'));
+            urlencoded.append("name", localStorage.getItem('userName'));
+            urlencoded.append("email", localStorage.getItem('userEmail'));
+            urlencoded.append("reward", indicatedSegment.text);
 
             var requestOptions = {
             method: 'POST',
@@ -178,10 +178,8 @@
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
-            console.log(localStorage.getItem("userData"));
+            // console.log(localStorage.getItem("userData").email);
             console.log('reward -> ' + indicatedSegment.text);
-
-
             resetWheel()
 		}
     </script>
