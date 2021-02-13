@@ -392,3 +392,39 @@ body {
     }
     
 } 
+
+@media only screen and (max-device-width: 1080px ) and (min-device-height: 1025px) and (orientation : portrait){
+	body {
+		background-image: url("../assets/image/background-mobile.png");
+		background-size: cover;
+		background-repeat:no-repeat;
+		z-index: -1;
+	}
+
+	.ribbon {
+		width: 94vw;
+		margin-top: 9vh;
+		margin-bottom: 2%;
+	}
+
+	.img-segment {
+		z-index: 3000;
+		margin-top: 6.7% !important;
+		width: 88%;
+	}
+
+	.canvasContainer {
+		background-image: url(../assets/image/wheel_back.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 100% auto;
+		margin-bottom: 0%;
+	}
+	.img-bottom-left {
+		width: 48vw;
+	}
+	
+	.img-bottom-right {
+		width: 40vw;
+	}
+}
