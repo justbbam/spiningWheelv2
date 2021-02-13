@@ -62,7 +62,7 @@
 
         function getCurrentUserInfo() {   
             FB.api('/me?fields=name,email,first_name,last_name,id', function(userInfo) {
-                var fullname = userInfo.id+" "+userInfo.last_name
+                var fullname = userInfo.first_name+" "+userInfo.last_name
                 // var result = '';
                 // result+= "ID: "+userInfo.id+"\r";
                 // result+= " Name: "+userInfo.first_name+"\r";
